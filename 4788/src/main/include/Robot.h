@@ -8,6 +8,7 @@
 #include <frc/DoubleSolenoid.h>
 #include <ctre/Phoenix.h>
 #include <iostream>
+#include <cameraserver/CameraServer.h>
 
 class Robot : public frc::TimedRobot {
  public:

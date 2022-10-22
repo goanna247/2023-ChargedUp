@@ -9,6 +9,11 @@ double lastTimeStamp;
 double dt;
 
 void Robot::RobotInit() {
+
+  auto camera = CameraServer::GetInstance()->StartAutomaticCapture(0);
+  camera.SetFPS(30);
+  camera.SetResolution(160, 120);
+
   driver = new frc::XboxController(0);
 
   leftOne = new TalonSRX(3);
