@@ -4,7 +4,7 @@
   apply plugin: 'edu.wpi.first.GradleRIO'
 
   ext {
-    teamID = 4788
+    teamID = 9788
   }
 
   // Define my targets (RoboRIO) and artifacts (deployable files)

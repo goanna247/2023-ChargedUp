@@ -25,7 +25,7 @@ class Robot : public frc::TimedRobot {
 
  private:
   frc::XboxController *driver;
-  frc::DoubleSolenoid *gripper;
-  TalonSRX *leftOne, *leftTwo, *rightOne, *arm;
-  VictorSPX *rightTwo;
+  // frc::DoubleSolenoid *gripper;
+  TalonSRX *leftOne, *leftTwo, *leftThree, *rightOne, *rightTwo, *rightThree;
+  // VictorSPX *rightTwo;
 };
