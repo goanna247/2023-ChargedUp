@@ -24,8 +24,11 @@ void Robot::RobotInit() {
   rightTwo = new TalonSRX(5);
   rightThree = new TalonSRX(6);
 
+  shoot = new VictorSPX(11);
+  intake = new TalonSRX(12);
+
   // arm = new TalonSRX(5);
-  // gripper = new frc::DoubleSolenoid(6, frc::PneumaticsModuleType::CTREPCM, 0, 1);
+  gripper = new frc::DoubleSolenoid(6, frc::PneumaticsModuleType::CTREPCM, 0, 1);
 }
 void Robot::RobotPeriodic() {}
 
@@ -44,6 +47,27 @@ void Robot::TeleopPeriodic() {
   leftTwo->Set(ControlMode::PercentOutput, rightSpeed); //yes
   leftThree->Set(ControlMode::PercentOutput, -rightSpeed); //yes
 
+  if(driver->GetRightTriggerAxis() > 0.3){
+    intake->Set(ControlMode::PercentOutput, 0.5);
+  }
+  else{
+    if(driver ->GetBButton()){
+      intake->Set(ControlMode::PercentOutput, -0.2);
+    }
+    else{intake->Set(ControlMode::PercentOutput, 0);} 
+  }
+
+  if(driver->GetLeftTriggerAxis() > 0.3){
+    shoot->Set(ControlMode::PercentOutput, -0.6);
+  }
+  else{
+    if(driver->GetXButton()){
+      shoot->Set(ControlMode::PercentOutput, -1);
+    }
+    else{shoot->Set(ControlMode::PercentOutput, 0);}
+    
+  }
+
   // double armSpeed = driver->GetLeftTriggerAxis() > 0.1 ? driver->GetLeftTriggerAxis() : 0;
   // armSpeed = driver->GetRightTriggerAxis() > 0.1 ? -driver->GetRightTriggerAxis() : 0;
 
@@ -51,11 +75,13 @@ void Robot::TeleopPeriodic() {
 
   // arm->Set(ControlMode::PercentOutput, armSpeed);
 
-  // if (driver->GetRightBumper()) {
-  //   gripper->DoubleSolenoid::Set(frc::DoubleSolenoid::kForward);
-  // } else {
-  //   gripper->DoubleSolenoid::Set(frc::DoubleSolenoid::kReverse);
-  // }
+  if (driver->GetRightBumper()) {
+    gripper->DoubleSolenoid::Set(frc::DoubleSolenoid::kForward);
+  }
+
+  if(driver->GetLeftBumper()){
+    gripper->DoubleSolenoid::Set(frc::DoubleSolenoid::kReverse);
+  }
 
 }
 
