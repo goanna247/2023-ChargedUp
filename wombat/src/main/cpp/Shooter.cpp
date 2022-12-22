@@ -44,7 +44,7 @@ void Shooter::OnUpdate(units::second_t dt) {
 void Shooter::SetManual(units::volt_t voltage) {
   _state = ShooterState::kManual;
   _setpointManual = voltage;
-
+ 
 }
 
 void Shooter::SetPID(units::radians_per_second_t goal) {
