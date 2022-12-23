@@ -31,5 +31,7 @@ class Robot : public frc::TimedRobot {
 
  private:
   RobotMap map;
-  wom::Shooter *shooter;
+  // wom::Shooter *shooter;
+
+  TalonSRX *intakeMotor;
 };

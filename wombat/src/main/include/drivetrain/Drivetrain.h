@@ -80,21 +80,21 @@ namespace wom {
 
   };
 
-  class DrivetrainDriveDistance : public behaviour::Behaviour {
-   public:
-    DrivetrainDriveDistance(Drivetrain *d, units::meter_t length, std::optional<units::meter_t> radius = {});
+  // class DrivetrainDriveDistance : public behaviour::Behaviour {
+  //  public:
+  //   DrivetrainDriveDistance(Drivetrain *d, units::meter_t length, std::optional<units::meter_t> radius = {});
 
-    units::meter_t GetDistance() const;
+  //   units::meter_t GetDistance() const;
 
-    void OnStart() override;
-    void OnTick(units::second_t dt) override;
-   private:
-    Drivetrain *_drivetrain;
-    units::meter_t _start_distance{0};
-    std::optional<units::meter_t> _radius;
+  //   void OnStart() override;
+  //   void OnTick(units::second_t dt) override;
+  //  private:
+  //   Drivetrain *_drivetrain;
+  //   units::meter_t _start_distance{0};
+  //   std::optional<units::meter_t> _radius;
 
-    PIDController<units::meter, units::meters_per_second> _pid;
-  };
+  //   PIDController<units::meter, units::meters_per_second> _pid;
+  // };
 
   class DrivetrainTurnToAngle : public behaviour::Behaviour {
    public: 
