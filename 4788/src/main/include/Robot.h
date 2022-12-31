@@ -9,7 +9,7 @@
 // #include "RobotStart.h"
 // #include "RobotStartup.h"
 // #include "Encoder.h"
-#include "Shooter.h"
+// #include "Shooter.h"
 
 #include <ctre/Phoenix.h>
 #include <frc/XboxController.h>
@@ -33,5 +33,7 @@ class Robot : public frc::TimedRobot {
   RobotMap map;
   // wom::Shooter *shooter;
 
-  TalonSRX *intakeMotor;
+  // TalonSRX *intakeMotor;
+  // VictorSPX *otherMotor;
+  // TalonFX *falconMotor;
 };
