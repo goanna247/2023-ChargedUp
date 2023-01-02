@@ -15,8 +15,9 @@ double dt;
 TalonSRX intakeMotor(4);
 
 void Robot::RobotInit() {
-  // ShooterParams shooterParams{map.shooter.shooterGearbox, map.shooter.pid, map.shooter.currentLimit};
-  // shooter = new Shooter(shooterParams);
+  ShooterParams shooterParams{map.shooter.shooterGearbox, map.shooter.pid, map.shooter.currentLimit};
+  shooter = new Shooter("shooter", shooterParams);
+
   
   // BehaviourScheduler::GetInstance()->Register(shooter);
   // shooter->SetDefaultBehaviour([this]() {
