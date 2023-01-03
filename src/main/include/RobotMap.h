@@ -39,5 +39,4 @@ struct RobotMap {
 
     units::ampere_t currentLimit{35};
   }; ShooterSystem shooter;
-
 };

@@ -12,11 +12,11 @@ double currentTimeStamp;
 double lastTimeStamp;
 double dt;
 
-TalonSRX intakeMotor(4);
+// TalonSRX intakeMotor(4);
 
 void Robot::RobotInit() {
-  ShooterParams shooterParams{map.shooter.shooterGearbox, map.shooter.pid, map.shooter.currentLimit};
-  shooter = new Shooter("shooter", shooterParams);
+  // ShooterParams shooterParams{map.shooter.shooterGearbox, map.shooter.pid, map.shooter.currentLimit};
+  // shooter = new Shooter("shooter", shooterParams);
 
   
   // BehaviourScheduler::GetInstance()->Register(shooter);
@@ -46,7 +46,7 @@ void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {
-  intakeMotor.Set(ControlMode::PercentOutput, 0.6);
+  // intakeMotor.Set(ControlMode::PercentOutput, 0.6);
   // intakeMotor->SetVoltage(12_V);
 }
 

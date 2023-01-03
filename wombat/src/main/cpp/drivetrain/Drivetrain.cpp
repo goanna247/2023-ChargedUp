@@ -97,38 +97,7 @@ units::meters_per_second_t Drivetrain::GetRightSpeed() const {
 
 // Drivetrain Behaviours
 
-<<<<<<< HEAD
-// DrivetrainDriveDistance::DrivetrainDriveDistance(Drivetrain *d, units::meter_t length, std::optional<units::meter_t> radius) : _drivetrain(d), _pid(d->GetConfig().distancePID), _radius(radius) {
-//   Controls(d);
-//   _pid.SetSetpoint(length);
-// }
 
-// units::meter_t DrivetrainDriveDistance::GetDistance() const {
-//   return (_drivetrain->GetLeftDistance() + _drivetrain->GetRightDistance()) / 2;
-// }
-
-// void DrivetrainDriveDistance::OnStart() {
-//   _start_distance = GetDistance();
-// }
-
-// void DrivetrainDriveDistance::OnTick(units::second_t dt) {
-//   auto speed = _pid.Calculate(GetDistance() - _start_distance, dt);
-//   if (_radius.has_value()) {
-//     _drivetrain->SetVelocity(frc::ChassisSpeeds {
-//       speed, 0_mps, units::radians_per_second_t{(speed / _radius.value()).value()}
-//     });
-//   } else {
-//     _drivetrain->SetVelocity(frc::ChassisSpeeds {
-//       speed, 0_mps, 0_deg_per_s
-//     });
-//   }
-
-//   if (_pid.IsStable()) {
-//     _drivetrain->SetIdle();
-//     SetDone();
-//   }
-// }
-=======
 DrivetrainDriveDistance::DrivetrainDriveDistance(Drivetrain *d, units::meter_t length, std::optional<units::meter_t> radius) : _drivetrain(d), _pid("drivetrain/behaviours/DrivetrainDriveDistance/pid", d->GetConfig().distancePID), _radius(radius) {
   Controls(d);
   _pid.SetSetpoint(length);
@@ -159,7 +128,6 @@ void DrivetrainDriveDistance::OnTick(units::second_t dt) {
     SetDone();
   }
 }
->>>>>>> 3a8353b982dde30352a4cd4b23e8d9993e68d6fa
 
 // Turn to angle behaviours 
 
