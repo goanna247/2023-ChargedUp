@@ -20,10 +20,10 @@ struct RobotMap {
   Controllers controllers;
 
   struct MecanumDriveSystem { // WPI_TalonSRX(10) what is 10, and wot should i set it to
-    wom::MotorVoltageController flMotorController{new WPI_TalonSRX(10)};
-    wom::MotorVoltageController frMotorController{new WPI_TalonSRX(2)};
-    wom::MotorVoltageController rlMotorController{new WPI_TalonSRX(11)};
-    wom::MotorVoltageController rrMotorController{new WPI_TalonSRX(6)};
+    wom::MotorVoltageController flMotorController{new WPI_TalonSRX(6)};
+    wom::MotorVoltageController frMotorController{new WPI_TalonSRX(11)};
+    wom::MotorVoltageController rlMotorController{new WPI_TalonSRX(2)};
+    wom::MotorVoltageController rrMotorController{new WPI_TalonSRX(10)};
 
     wom::Gearbox frontLeftGearbox{
       &flMotorController,
@@ -38,12 +38,12 @@ struct RobotMap {
     wom::Gearbox rearLeftGearbox{
       &rlMotorController,
       nullptr,
-      wom::DCMotor::CIM(2).WithReduction(10.71)
+      wom::DCMotor::CIM(2).WithReduction(8.45)
     };
     wom::Gearbox rearRightGearbox{
       &rrMotorController,
       nullptr,
-      wom::DCMotor::CIM(2).WithReduction(8.45)
+      wom::DCMotor::CIM(2).WithReduction(10.71)
     };
     
     MecanumDrivebaseConfig config{
@@ -84,7 +84,7 @@ struct RobotMap {
   struct ArmSystem {
     wom::MotorVoltageController controller{new WPI_TalonSRX(5)}; //0, 1, 5
     // wom::Encoder encoder{2048};
-    wom::DigitalEncoder armEncoder{2, 3, 2048};
+    wom::DutyCycleEncoder armEncoder{2};
 
     wom::Gearbox gearbox{
       &controller,

@@ -10,6 +10,7 @@ void Arm::OnUpdate(units::second_t dt) {
   units::volt_t voltage = 0_V;
   switch (_state) {
     case ArmState::kIdle:
+      std::cout << "arm idle state" << std::endl;
       break;
     case ArmState::kZeroing:
       voltage = -2_V;
@@ -17,6 +18,7 @@ void Arm::OnUpdate(units::second_t dt) {
         _config.gearbox.encoder->ZeroEncoder();
         _state = ArmState::kIdle;
       }
+      std::cout << "arm zeroing state" << std::endl;
       break;
     case ArmState::kAngle:
       {
@@ -25,6 +27,7 @@ void Arm::OnUpdate(units::second_t dt) {
         // units::radian_t error = _targetAngle - currentAngle;
         // voltage = 12_V / 20_deg * error;
       }
+      std::cout << "arm angle state" << std::endl;
       break;
   }
   _config.gearbox.transmission->SetVoltage(voltage);
@@ -32,6 +35,10 @@ void Arm::OnUpdate(units::second_t dt) {
 
 void Arm::SetIdle() {
   _state = ArmState::kIdle;
+}
+
+units::angle::radian_t Arm::GetAngle() {
+  return _config.gearbox.encoder->GetEncoderPosition();
 }
 
 void Arm::SetZeroing() {

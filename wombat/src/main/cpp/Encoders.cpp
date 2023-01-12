@@ -60,3 +60,14 @@ double TalonFXEncoder::GetEncoderRawTicks() const {
 double TalonFXEncoder::GetEncoderTickVelocity() const {
   return _controller->GetSelectedSensorVelocity() * 10;
 }
+
+DutyCycleEncoder::DutyCycleEncoder(int channel, double reduction) 
+  : Encoder(1, reduction), _dutyCycleEncoder(channel) {}
+
+double DutyCycleEncoder::GetEncoderRawTicks() const {
+  return _dutyCycleEncoder.Get().value();
+}
+
+double DutyCycleEncoder::GetEncoderTickVelocity() const {
+  return 0;
+}

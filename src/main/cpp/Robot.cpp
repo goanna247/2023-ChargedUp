@@ -31,6 +31,7 @@ void Robot::RobotPeriodic() {
   arm->OnUpdate(20_ms);
   climber->OnUpdate(20_ms);
 
+  std::cout << arm->GetAngle().convert<units::degree>().value() << std::endl;
   BehaviourScheduler::GetInstance()->Tick();
 }
 
@@ -38,31 +39,35 @@ void Robot::AutonomousInit() { }
 void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() {
+  // arm->ZeroEncoder()
+
   auto sched = BehaviourScheduler::GetInstance();
   sched->Schedule(make<IntakeBehaviour>(intake, &map.controllers.coDriver));
   sched->Schedule(make<ClimberBehaviour>(climber, &map.controllers.coDriver));
   sched->Schedule(make<ManualDrivebase>(mecanumDrivebase, &map.controllers.driver));
+
+  arm->SetZeroing();
 }
-void Robot::TeleopPeriodic() { 
+void Robot::TeleopPeriodic() {
   // if(map.controllers.driver.GetAButton())
   //   intake->SetIntaking();
   // if(map.controllers.driver.GetBButton())
   //   intake->SetOuttaking();
 
-    double l_x = map.controllers.driver.GetLeftX();
-    double l_y = map.controllers.driver.GetLeftY();
-    double r_x = map.controllers.driver.GetRightX();
+    // double l_x = map.controllers.driver.GetLeftX();
+    // double l_y = map.controllers.driver.GetLeftY();
+    // double r_x = map.controllers.driver.GetRightX();
 
-    // deals with controller deadzones
-    if (-driverDeadzone <= l_x && l_x <= driverDeadzone) {l_x = 0;}
-    if (-driverDeadzone <= l_y && l_y <= driverDeadzone) {l_y = 0;}
-    if (-turningDeadzone <= r_x && r_x <= turningDeadzone) {r_x = 0;}
+    // // deals with controller deadzones
+    // if (-driverDeadzone <= l_x && l_x <= driverDeadzone) {l_x = 0;}
+    // if (-driverDeadzone <= l_y && l_y <= driverDeadzone) {l_y = 0;}
+    // if (-turningDeadzone <= r_x && r_x <= turningDeadzone) {r_x = 0;}
 
-    mecanumDrivebase->SetVelocity(frc::ChassisSpeeds {
-        l_x * maxMovementMagnitude,
-        l_y * maxMovementMagnitude,
-        r_x * 180_deg / 1_s
-    });
+    // mecanumDrivebase->SetVelocity(frc::ChassisSpeeds {
+    //     l_x * maxMovementMagnitude,
+    //     l_y * maxMovementMagnitude,
+    //     r_x * 180_deg / 1_s
+    // });
 
 
 
@@ -73,7 +78,8 @@ void Robot::TeleopPeriodic() {
   // if (map.controllers.driver.GetXButton())
   //   arm->SetAngle(45_deg);
   if (map.controllers.driver.GetYButton())
-    arm->SetAngle(90_deg);
+    arm->SetAngle(45_deg);
+
 }
 
 

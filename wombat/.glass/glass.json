@@ -1,0 +1,30 @@
+{
+  "NetworkTables": {
+    "LiveWindow": {
+      "Ungrouped": {
+        "open": true
+      },
+      "open": true
+    },
+    "arm": {
+      "open": true,
+      "pid": {
+        "config": {
+          "open": true
+        },
+        "open": true
+      }
+    },
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Ungrouped/DigitalInput[1]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[2]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[3]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[4]": "Digital Input"
+    }
+  },
+  "NetworkTables Settings": {
+    "mode": "Client",
+    "serverTeam": "10.47.88.2"
+  }
+}

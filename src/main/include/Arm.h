@@ -5,6 +5,7 @@
 #include <frc/DigitalInput.h>
 #include "Encoder.h"
 #include "PID.h"
+#include <iostream>
 
 struct ArmConfig {
   wom::Gearbox gearbox;
@@ -27,6 +28,8 @@ class Arm : public behaviour::HasBehaviour {
   void SetIdle();
   void SetAngle(units::radian_t angle);
   void SetZeroing();
+
+  units::angle::radian_t GetAngle();
 
   ArmState GetState() const;
  private:

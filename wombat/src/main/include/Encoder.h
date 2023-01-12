@@ -1,6 +1,8 @@
 #pragma once
 
 #include <frc/Encoder.h>
+#include <frc/DutyCycleEncoder.h>
+
 #include <units/angle.h>
 #include <units/angular_velocity.h>
 
@@ -62,5 +64,15 @@ namespace wom {
     double GetEncoderTickVelocity() const override;
    private:
     ctre::phoenix::motorcontrol::can::TalonFX *_controller;
+  };
+
+  class DutyCycleEncoder : public Encoder { 
+   public:
+    DutyCycleEncoder(int channel, double reduction = 1);
+
+    double GetEncoderRawTicks() const override;
+    double GetEncoderTickVelocity() const override;
+   private:
+    frc::DutyCycleEncoder _dutyCycleEncoder;
   };
 }  // namespace wom

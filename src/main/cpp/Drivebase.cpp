@@ -1,5 +1,7 @@
 #include "Drivebase.h"
 
+#include <iostream>
+
 using namespace wom;
 
 MecanumDrivebase::MecanumDrivebase(MecanumDrivebaseConfig config)
@@ -29,6 +31,8 @@ void MecanumDrivebase::OnUpdate(units::second_t deltaTime){
       frVoltage = _config.frontRightGearBox.motor.Voltage(0_Nm, frSpeed);
       rlVoltage = _config.rearLeftGearBox.motor.Voltage(0_Nm, rlSpeed);
       rrVoltage = _config.rearRightGearBox.motor.Voltage(0_Nm, rrSpeed);
+
+      std::cout << "Vels " << flVoltage.value() << ", " << frVoltage.value() << ", " << rlVoltage.value() << ", " << rrVoltage.value() << std::endl;
     }
     break;
   }
