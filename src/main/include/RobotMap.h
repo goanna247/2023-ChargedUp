@@ -82,9 +82,9 @@ struct RobotMap {
   
 
   struct ArmSystem {
-    wom::MotorVoltageController controller{new WPI_TalonSRX(5)}; //0, 1, 5
+    wom::MotorVoltageController controller{new WPI_TalonSRX(0)}; //0, 1, 5
     // wom::Encoder encoder{2048};
-    wom::DutyCycleEncoder armEncoder{2};
+    wom::DutyCycleEncoder armEncoder{3};
 
     wom::Gearbox gearbox{
       &controller,

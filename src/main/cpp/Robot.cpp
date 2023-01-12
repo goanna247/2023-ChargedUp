@@ -19,7 +19,7 @@ void Robot::RobotInit() {
 
   arm = new Arm(map.arm.config);
   BehaviourScheduler::GetInstance()->Register(arm);
-  map.arm.config.gearbox.transmission->SetInverted(true);
+  map.arm.config.gearbox.transmission->SetInverted(false);
 
   climber = new Climber(map.climber.config);
   BehaviourScheduler::GetInstance()->Register(climber);
