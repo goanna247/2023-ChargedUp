@@ -29,6 +29,9 @@ void Arm::OnUpdate(units::second_t dt) {
       }
       std::cout << "arm angle state" << std::endl;
       break;
+    case ArmState::kManual:
+      voltage = _controllerInput * 11_V;
+      break;
   }
   _config.gearbox.transmission->SetVoltage(voltage);
 }
@@ -48,4 +51,9 @@ void Arm::SetZeroing() {
 void Arm::SetAngle(units::radian_t angle) {
   _state = ArmState::kAngle;
   _pid.SetSetpoint(angle);
+}
+
+void Arm::SetManual(double controllerInput) {
+  _controllerInput = controllerInput;
+  _state = ArmState::kManual;
 }

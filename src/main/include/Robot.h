@@ -43,5 +43,5 @@ class Robot : public frc::TimedRobot {
   const double driverDeadzone = 0.05;
   const double turningDeadzone = 0.1;
   const units::meters_per_second_t maxMovementMagnitude = 1_mps;
-
+  bool armManualControl = false;
 };

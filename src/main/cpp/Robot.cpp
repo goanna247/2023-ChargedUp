@@ -17,7 +17,7 @@ void Robot::RobotInit() {
     return make<ManualDrivebase>(mecanumDrivebase, &map.controllers.driver);
   });
 
-  arm = new Arm(map.arm.config);
+  arm = new Arm(map.arm.config);//new arm
   BehaviourScheduler::GetInstance()->Register(arm);
   map.arm.config.gearbox.transmission->SetInverted(false);
 
@@ -26,7 +26,7 @@ void Robot::RobotInit() {
 }
 void Robot::RobotPeriodic() {
   /* Update the intake */
-  intake->OnUpdate(20_ms);
+  intake->OnUpdate(20_ms);//intake
   mecanumDrivebase->OnUpdate(20_ms);
   arm->OnUpdate(20_ms);
   climber->OnUpdate(20_ms);
@@ -46,7 +46,7 @@ void Robot::TeleopInit() {
   sched->Schedule(make<ClimberBehaviour>(climber, &map.controllers.coDriver));
   sched->Schedule(make<ManualDrivebase>(mecanumDrivebase, &map.controllers.driver));
 
-  arm->SetZeroing();
+  arm->SetZeroing();//set the amr to zero
 }
 void Robot::TeleopPeriodic() {
   // if(map.controllers.driver.GetAButton())
@@ -68,18 +68,25 @@ void Robot::TeleopPeriodic() {
     //     l_y * maxMovementMagnitude,
     //     r_x * 180_deg / 1_s
     // });
+  double armSpeed = map.controllers.coDriver.GetRightY();//gets the Y bu on
 
+  if (map.controllers.coDriver.GetXButton()) {
+    if (armManualControl) {
+      armManualControl = false;//sets the arm to be in manual control
+    } else {
+      armManualControl = true;//sets the arm to not be in manual control
+    }
+  }
 
-
-  if (map.controllers.driver.GetAButton())
-    arm->SetAngle(0_deg);
-  // if (map.controllers.driver.GetBButton())
-  //   arm->SetAngle(30_deg);
-  // if (map.controllers.driver.GetXButton())
-  //   arm->SetAngle(45_deg);
-  if (map.controllers.driver.GetYButton())
-    arm->SetAngle(45_deg);
-
+  if (armManualControl) {
+    arm->SetManual(armSpeed);
+    std::cout << "arm manual speed" << std::endl;
+  } else {
+    if (map.controllers.driver.GetAButton())
+      arm->SetAngle(0_deg);//sets the angle to 0 degrees
+    if (map.controllers.driver.GetYButton())
+      arm->SetAngle(45_deg);//sets the angle to 45 degrees
+  }
 }
 
 

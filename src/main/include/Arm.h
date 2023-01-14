@@ -16,7 +16,8 @@ struct ArmConfig {
 enum class ArmState {
   kIdle,
   kAngle,
-  kZeroing
+  kZeroing,
+  kManual
 };
 
 class Arm : public behaviour::HasBehaviour {
@@ -28,6 +29,7 @@ class Arm : public behaviour::HasBehaviour {
   void SetIdle();
   void SetAngle(units::radian_t angle);
   void SetZeroing();
+  void SetManual(double controllerInput);
 
   units::angle::radian_t GetAngle();
 
@@ -36,4 +38,5 @@ class Arm : public behaviour::HasBehaviour {
   ArmConfig _config;
   ArmState _state = ArmState::kIdle;
   wom::PIDController<units::radian, units::volt> _pid;
+  double _controllerInput;
 };
