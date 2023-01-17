@@ -2,9 +2,11 @@
 
 #include "RobotMap.h"
 #include "Vision.h"
-
 #include <string>
 #include <frc/TimedRobot.h>
+#include <frc/event/EventLoop.h>
+#include <ctre/phoenix.h>
+#include <ctre/phoenix/motorcontrol/can/WPI_TalonSRX.h>
 
 using namespace frc;
 
@@ -25,6 +27,13 @@ class Robot : public frc::TimedRobot {
   void SimulationPeriodic() override;
 
  private:
+  frc::EventLoop loop;
+  
   RobotMap map;
-  Vision *vision;
+  // Vision *vision;
+  Armavator *armavator;
+  wom::SwerveDrive *swerve;
+  Intake *intake;
+
+  // WPI_TalonSRX armMotor, elevatorMotor;
 };
