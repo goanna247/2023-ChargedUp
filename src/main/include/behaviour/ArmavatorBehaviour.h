@@ -7,20 +7,10 @@
 #include <units/length.h>
 #include <units/time.h>
 
+using grid_t = ArmavatorConfig::grid_t;
+
 class ArmavatorGoToPositionBehaviour : public behaviour::Behaviour {
  public:
-//     using grid_t = ArmavatorConfig::grid_t;
-
-//     ArmavatorGoToPositionBehaviour(Armavator *armavator, ArmavatorPosition setpoint);
-
-//     void OnStart() override;
-//     void OnTick(units::second_t dt) override;
-
-//  private:
-//     Armavator *armavator;
-//     ArmavatorPosition setpoint;
-//     std::deque<grid_t::GridPathNode<units::second>> waypoints;
-// };
    //constructor for class
     ArmavatorGoToPositionBehaviour(Armavator *armavator, ArmavatorPosition setpoint, frc::XboxController &codriver);
 

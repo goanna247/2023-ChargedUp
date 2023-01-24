@@ -19,26 +19,26 @@
 #include <units/math.h>
 #include "behaviour/HasBehaviour.h"
 
-// struct ArmavatorConfig {
-//   using grid_t = wom::DiscretisedOccupancyGrid<units::radian, units::meter>;
+struct ArmavatorConfig {
+  using grid_t = wom::DiscretisedOccupancyGrid<units::radian, units::meter>;
 
+
+  wom::ArmConfig arm;
+  wom::ElevatorConfig elevator;
+  grid_t grid;
+};
 
 //   wom::ArmConfig arm;
 //   wom::ElevatorConfig elevator;
 //   grid_t grid;
-// };
-
-  // wom::ArmConfig arm;
-  // wom::ElevatorConfig elevator;
-  // grid_t grid;
 
 
 // };
 
-// struct ArmavatorPosition {
-//   units::meter_t height;
-//   units::radian_t angle;
-// };
+struct ArmavatorPosition {
+  units::meter_t height;
+  units::radian_t angle;
+};
 
 enum class ArmavatorState {
   kIdle,
@@ -50,19 +50,19 @@ class Armavator : public behaviour::HasBehaviour {
   Armavator(wom::Gearbox &armGearbox, wom::Gearbox &elevatorGearbox, ArmavatorConfig &config);
   ~Armavator();
 
-//   void OnUpdate(units::second_t dt);
+  void OnUpdate(units::second_t dt);
 
   void SetIdle();
   void SetPosition(ArmavatorPosition pos);
   void SetZeroing();
 
-//   ArmavatorPosition GetCurrentPosition() const;
-//   bool IsStable() const;
+  ArmavatorPosition GetCurrentPosition() const;
+  bool IsStable() const;
 
   wom::Arm *arm;
   wom::Elevator *elevator;
-//  private: 
-//   ArmavatorState _state = ArmavatorState::kIdle;
+ private: 
+  ArmavatorState _state = ArmavatorState::kIdle;
 
   ArmavatorPosition _setpoint;
 

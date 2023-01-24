@@ -24,9 +24,9 @@ void Robot::RobotInit() {
   // map.swerveBase.moduleConfigs[0].turnMotor.transmission->SetInverted(true);
   // map.swerveBase.moduleConfigs[2].turnMotor.transmission->SetInverted(true);
   BehaviourScheduler::GetInstance()->Register(swerve);
-  swerve->SetDefaultBehaviour([this]() {
-    return make<ManualDrivebase>(swerve, &map.controllers.driver);
-  });
+  // swerve->SetDefaultBehaviour([this]() {
+  //   return make<ManualDrivebase>(swerve, &map.controllers.driver);
+  // });
 
   
   armavator = new Armavator(map.armavator.arm.gearbox, map.armavator.elevator.gearbox, map.armavator.config);
@@ -79,7 +79,6 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-<<<<<<< HEAD
   // map.swerveBase.turnMotors[0]->Set(0.5);
   double intakeSpeed = wom::deadzone(map.controllers.codriver.GetLeftY());
 

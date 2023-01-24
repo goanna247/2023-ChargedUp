@@ -39,7 +39,7 @@ class Robot : public frc::TimedRobot {
   frc::EventLoop loop;
   
   RobotMap map;
-  // Armavator *armavator;
+  Armavator *armavator;
   wom::SwerveDrive *swerve;
 
   bool intakeSol = false;
