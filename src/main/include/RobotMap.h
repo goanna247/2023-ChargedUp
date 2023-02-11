@@ -36,7 +36,8 @@ struct RobotMap {
   Controllers controllers;
 
   struct GripperTest {
-    rev::CANSparkMax gripperMotor{19, rev::CANSparkMax::MotorType::kBrushless};
+    // rev::CANSparkMax gripperMotor{19, rev::CANSparkMax::MotorType::kBrushless};
+    VictorSPX gripperMotor{18};
   }; GripperTest grTest;
 
   struct ControlSystem {

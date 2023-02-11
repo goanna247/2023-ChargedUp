@@ -141,25 +141,26 @@ void ArmavatorManualBehaviour::OnTick(units::second_t dt) {
   // }
 
 
-  // if (_tester.GetXButtonPressed()) {
-  //   _heightSetpoint = 0_m;
-  // } else if (_tester.GetYButtonPressed()) {
-  //   _heightSetpoint = 0.4_m;
-  // } else if (_tester.GetBButtonPressed()) {
-  //   _heightSetpoint = 0.7_m;
-  // } else if (_tester.GetAButtonPressed()) {
-  //   _heightSetpoint = 1_m;
+  if (_tester.GetXButtonPressed()) {
+    _heightSetpoint = 0_m;
+  } else if (_tester.GetYButtonPressed()) {
+    _heightSetpoint = 0.4_m;
+  } else if (_tester.GetBButtonPressed()) {
+    _heightSetpoint = 0.7_m;
+  } else if (_tester.GetAButtonPressed()) {
+    _heightSetpoint = 1_m;
+  }
+
+  // if (_tester.LeftBumper()) {
+  //   _heightSetpoint -= 0.1;
+  // } else if (_tester.RightBumper()) {
+  //   _heightSetpoint += 0.1;
   // }
 
-  // if (_tester.POV(0, &loop).Rising()) {
-
-  // } else if (_tester.POV(90, &loop).Rising()) {
-
-  // } else if (_tester.POV(180, &loop).Risin()) {
-
-  // } else if (_tester.POV(270, &loop).Rising()) {
-
+  // if (_tester.LeftTrigger()) {
+  //   _armSetpoint -= 0.1;
+  // } else if (_tester.RightTrigger()) {
+  //   _armSetpoint += 0.1;
   // }
-
   // _armavator->SetPosition()
 }

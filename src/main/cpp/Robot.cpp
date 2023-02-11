@@ -234,7 +234,7 @@ void Robot::TeleopPeriodic() {
   // sched->Schedule(make<ArmavatorGoToPositionBehaviour>(armavator, ArmavatorPosition{_elevatorSetpoint, _armSetpoint}));
   double speed = map.controllers.codriver.GetRightY();
 
-  map.grTest.gripperMotor.Set(speed);
+  map.grTest.gripperMotor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, speed);
 
   map.armTable.armManualTable->GetEntry("armSetpoint").SetDouble(_armSetpoint.convert<units::degree>().value());
   map.armTable.armManualTable->GetEntry("elevatorSetpoint").SetDouble(_elevatorSetpoint.convert<units::meter>().value());

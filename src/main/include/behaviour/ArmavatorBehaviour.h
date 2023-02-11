@@ -10,6 +10,9 @@
 #include "ControlUtil.h"
 #include <math.h>
 #include "RobotMap.h"
+#include <frc/event/EventLoop.h>
+#include <frc/GenericHID.h>
+
 
 class ArmavatorGoToPositionBehaviour : public behaviour::Behaviour {
  public:
@@ -103,4 +106,5 @@ class ArmavatorManualBehaviour : public behaviour::Behaviour {
 
   units::meter_t _heightSetpoint = 0_m;
   units::radian_t _angleSetpoint = 90_rad;
+  frc::EventLoop loop;
 };
