@@ -61,6 +61,7 @@ void SideIntake::OnUpdate(units::second_t dt) {
 
     _config.leftIntakeMotor->SetVoltage(-voltage);
     _config.rightIntakeMotor->SetVoltage(voltage);
+
 };
 
 void SideIntake::SetIdle() {

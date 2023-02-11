@@ -13,9 +13,14 @@
 #include <ctre/Phoenix.h>
 #include <units/math.h>
 #include "behaviour/HasBehaviour.h"
+#include <frc/DigitalInput.h>
 
 //the config class
 struct ArmavatorConfig {
+  frc::DigitalInput *lowerHE;
+  frc::DigitalInput *lowerMiddleHE;
+  frc::DigitalInput *highMiddleHE;
+  frc::DigitalInput *highHE;
   using grid_t = wom::DiscretisedOccupancyGrid<units::radian, units::meter>;
 
   //uses the configs from gthe arm and elevator, as well as includes the grid
@@ -28,14 +33,14 @@ struct ArmavatorConfig {
 struct ArmavatorPosition {
   units::meter_t height;
   units::radian_t angle;
-
 };
 
 //creates the states used to control the robot
 enum class ArmavatorState {
   kIdle,
-  kPosition,
-  kManual
+  kPosition, // holding it in place
+  kRaw,
+  kHE_Calibration
 };
 
 //the behaviour class information
@@ -50,21 +55,32 @@ class Armavator : public behaviour::HasBehaviour {
   void SetIdle();
   void SetPosition(ArmavatorPosition pos);
   void SetZeroing();
-  void SetManual(units::volt_t arm, units::volt_t elevator);
+  void SetRaw(units::volt_t arm, units::volt_t elevator);
+  void SetHECalibration();
 
   ArmavatorPosition GetCurrentPosition() const;
   bool IsStable() const;
+
+  ArmavatorState GetState() { return _state; }
+
+  ArmavatorConfig &GetConfig();
 
   //creates the arm and the elevator
   wom::Arm *arm;
   wom::Elevator *elevator;
   ArmavatorPosition _setpoint;
 
+  const units::centimeter_t lowerHEHeight = 0_m;
+  const units::centimeter_t lowerMiddleHEHeight = 0.5_m;
+  const units::centimeter_t highMiddleHEHeight = 1_m;
+  const units::centimeter_t highHEHeight = 1.5_m;
+
  private: 
   ArmavatorState _state = ArmavatorState::kIdle;
 
   units::volt_t _rawArm;
   units::volt_t _rawElevator;
+
 
   //creates an instance of the gearboxes and config
   wom::Gearbox &_armGearbox;

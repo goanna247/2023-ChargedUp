@@ -256,6 +256,10 @@ void SwerveDrive::OnStart() {
   }
 }
 
+bool SwerveDrive::IsMoving(){ // liam needs to work on this
+  return true;
+}
+
 void SwerveDrive::SetIdle() {
   _state = SwerveDriveState::kIdle;
 }
