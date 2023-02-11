@@ -30,8 +30,13 @@ struct RobotMap {
     //sets driver station numbers for the controllers
     frc::XboxController driver{0};
     frc::XboxController codriver{1};
+    frc::XboxController tester{2};
   };
   Controllers controllers;
+
+  struct GripperTest {
+    rev::CANSparkMax gripperMotor{19, rev::CANSparkMax::MotorType::kBrushless};
+  }; GripperTest grTest;
 
   struct ControlSystem {
     frc::Compressor pcmCompressor{1, frc::PneumaticsModuleType::CTREPCM};

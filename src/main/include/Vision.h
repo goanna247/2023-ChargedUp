@@ -34,7 +34,9 @@ class Vision : public behaviour::HasBehaviour {
     Vision(VisionConfig *config);
     std::optional<std::pair<frc::Pose3d, units::second_t>> OnUpdate(units::second_t dt);   
 
-    void OnTick(units::second_t dt); 
+    // void OnUpdate(units::second_t dt);
+
+    // double GetTapePos();
 
   private:
     VisionConfig *_config;

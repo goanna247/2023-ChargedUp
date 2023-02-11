@@ -35,7 +35,7 @@ void Robot::RobotInit() {
   vision = new Vision(&map.vision.config);
   BehaviourScheduler::GetInstance()->Register(vision);
   vision->SetDefaultBehaviour([this]() {
-    return make<VisionBehaviour>(vision, swerve, &map.controllers.codriver);
+    return make<VisionBehaviour>(vision, swerve, &map.controllers.codriver, &map.controllers.driver);
   });
 
 
@@ -233,6 +233,9 @@ void Robot::TeleopPeriodic() {
   // _elevatorSetpoint += (map.controllers.codriver.GetRightY() * 1_m) / 100;
 
   // sched->Schedule(make<ArmavatorGoToPositionBehaviour>(armavator, ArmavatorPosition{_elevatorSetpoint, _armSetpoint}));
+  double speed = map.controllers.codriver.GetRightY();
+
+  map.grTest.gripperMotor.Set(speed);
 
   map.armTable.armManualTable->GetEntry("armSetpoint").SetDouble(_armSetpoint.convert<units::degree>().value());
   map.armTable.armManualTable->GetEntry("elevatorSetpoint").SetDouble(_elevatorSetpoint.convert<units::meter>().value());

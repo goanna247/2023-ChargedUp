@@ -15,6 +15,14 @@ Vision::Vision(VisionConfig *config)
   )
 { }
 
+// void Vision::GetTapePos() {
+
+// }
+
+// void Vision::OnUpdate(units::second_t dt) {
+
+// }
+
 std::optional<std::pair<frc::Pose3d, units::second_t>> Vision::OnUpdate(units::second_t dt) {
   //photonlib::PhotonPipelineResult result = _config.camera->GetLatestResult();
   // photonlib::PhotonTrackedTarget target = result.GetBestTarget();
