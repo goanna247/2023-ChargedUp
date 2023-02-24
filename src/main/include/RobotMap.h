@@ -26,6 +26,11 @@
 #include <string>
 
 struct RobotMap {
+  struct Fuck {
+  }; Fuck fuck;
+
+    // rev::CANSparkMax m_motor{11, rev::CANSparkMax::MotorType::kBrushless};
+
   struct Controllers {  
     //sets driver station numbers for the controllers
     frc::XboxController driver{0};
@@ -228,12 +233,14 @@ struct RobotMap {
       wom::Gearbox leftGearbox {
         &leftMotorGroup,
         &leftEncoder,
+        // nullptr,
         wom::DCMotor::NEO(1).WithReduction(100)
       };
 
       wom::Gearbox rightGearbox {
         &rightMotorGroup,
         &rightEncoder,
+        // nullptr,
         wom::DCMotor::NEO(1).WithReduction(100)
       };
 
@@ -274,19 +281,22 @@ struct RobotMap {
       wom::MotorVoltageController rightMotorGroup = wom::MotorVoltageController::Group(rightElevatorMotor);
 
       //creates an instance of the encoder that will be used for the elevator
-      wom::CANSparkMaxEncoder leftEncoder{&leftElevatorMotor, 14/60};
-      wom::CANSparkMaxEncoder rightEncoder{&rightElevatorMotor, 14/60};
+      // wom::CANSparkMaxEncoder leftEncoder{&leftElevatorMotor, 14/60};
+      // wom::CANSparkMaxEncoder rightEncoder{&rightElevatorMotor, 14/60};
+      rev::SparkMaxRelativeEncoder m_encoder = leftElevatorMotor.GetEncoder();
 
       //creates an instance of the gearbox used for the elevator
       wom::Gearbox leftGearbox {
         &leftMotorGroup,
-        &leftEncoder,
+        // &leftEncoder,
+        nullptr,
         wom::DCMotor::NEO(1).WithReduction(14/60)
       };
 
       wom::Gearbox rightGearbox {
         &rightMotorGroup,
-        &rightEncoder,
+        // &rightEncoder,
+        nullptr,
         wom::DCMotor::NEO(1).WithReduction(14/60)
       };
 

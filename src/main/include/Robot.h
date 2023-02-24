@@ -5,6 +5,7 @@
 
 #include <string>
 #include <iostream>
+#include <rev/CANSparkMax.h>
 
 #include <ctre/Phoenix.h>
 #include <frc/TimedRobot.h>
@@ -58,4 +59,7 @@ class Robot : public frc::TimedRobot {
 
   units::meter_t _elevatorSetpoint = 0_m;
   units::radian_t _armSetpoint = 0_deg;
+
+  // rev::CANSparkMax *motor; 
+  // rev::CANEncoder *encoder;
 };
