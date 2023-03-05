@@ -27,7 +27,7 @@ class ManualDrivebase : public behaviour::Behaviour{
   bool isZero = false;
 
   units::meters_per_second_t highSensitivityDriveSpeed = 16_ft / 1_s;
-  units::meters_per_second_t lowSensitivityDriveSpeed = 3.25_ft / 1_s;
+  units::meters_per_second_t lowSensitivityDriveSpeed = 5_ft / 1_s;
 
   units::radians_per_second_t highSensitivityRotateSpeed = 360_deg / 1_s;
   units::radians_per_second_t lowSensitivityRotateSpeed = 90_deg / 1_s;

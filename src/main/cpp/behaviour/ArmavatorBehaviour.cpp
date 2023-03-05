@@ -169,7 +169,7 @@ void ArmavatorManualBehaviour::OnTick(units::second_t dt) {
       //gripper
       //TODO potench change max speed here
       _setpointValue.height = 0.9_m;
-      _setpointValue.angle = -50_deg;
+      _setpointValue.angle = 180_deg;
       _armavator->SetPosition(_setpointValue);
       _manualSetpoint = {_armavator->GetCurrentPosition().height, _armavator->GetCurrentPosition().angle};
       std::cout << "GO TO armavator POS 4 " << std::endl;
