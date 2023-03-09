@@ -294,13 +294,19 @@ struct ControlSystem {
           3_deg,
           0.5_deg / 1_s
         ),
+        wom::PIDConfig<units::radians_per_second, units::volts>(
+          "/armavator/arm/velocity/config",
+          12_V / (180_deg / 1_s),
+          0_V / (25_deg),
+          0_V / (180_deg / 1_s / 1_s)
+        ),
         5_kg, 
         5_kg,
-        1_m,
+        1.4_m,
         -90_deg,
         270_deg,
         0_deg
-      };
+      }
 
       Arm() {
         //sets the ofset for the encoder so it reads the right value
