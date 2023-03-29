@@ -125,7 +125,8 @@ std::shared_ptr<Behaviour> Single(Drivebase drivebase, Armavator *armavator, Gri
     // << make<ArmavatorGoToAutoSetpoint>(armavator, 0.9_m, 0_deg)->WithTimeout(2_s)
     // << make<WaitTime>(0.01_s)
     // << ((
-    << make<DrivebasePoseBehaviour>(Drivebase.swerve, frc::Pose2d{0.1_m, 0_m, 0_deg})->WithTimeout(1_s)
+    << make<DrivebasePoseBehaviour>(drivebase.swerv
+    e, frc::Pose2d{0.1_m, 0_m, 0_deg})->WithTimeout(1_s)
     << make<ArmavatorGoToAutoSetpoint>(armavator, 0.9_m, 0_deg)
     << make<ArmavatorGoToAutoSetpoint>(armavator, 0.3_m, 90_deg)
     << make<ArmavatorGoToAutoSetpoint>(armavator, 0.4_m, 140_deg, 0.4, 0.15)
@@ -215,6 +216,8 @@ std::shared_ptr<Behaviour> Triple(Drivebase drivebase, bool blueAlliance, Starti
 
     << autoPathDetails.endPathing;
 }
+
+//say something mean - cherry 2023
 
 std::shared_ptr<Behaviour> Quad(Drivebase drivebase, bool blueAlliance, StartingConfig startConfig, EndingConfig endConfig){
   AutoPathDetails autoPathDetails = GetAutoPathingDetails(drivebase, startConfig, endConfig, blueAlliance, 4);
