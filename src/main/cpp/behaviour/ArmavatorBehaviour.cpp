@@ -24,7 +24,6 @@ void ArmavatorGoToAutoSetpoint::OnTick(units::second_t dt) {
 //Constructs class
 ArmavatorGoToPositionBehaviour::ArmavatorGoToPositionBehaviour(Armavator *armavator, ArmavatorPosition setpoint)
 : _armavator(armavator), _setpoint(setpoint) {
-  //tells code that the points are controlled (one point at a time) 
   Controls(armavator);
 };
 
@@ -52,7 +51,6 @@ void ArmavatorGoToPositionBehaviour::OnTick(units::second_t dt) {
 
 ArmavatorRawBehaviour::ArmavatorRawBehaviour(Armavator *armavator, frc::XboxController &codriver)
 : _armavator(armavator), _codriver(codriver) {
-  //tells code that the points are controlled (one point at a time) 
   Controls(armavator);
 };
 
@@ -74,17 +72,7 @@ ArmavatorManualBehaviour::ArmavatorManualBehaviour(Armavator *armavator, frc::Xb
 }
 
 void ArmavatorManualBehaviour::OnStart() {
-  // startHeight = _armavator->GetCurrentPosition().height;
-  // _manualSetpoint = _armavator->GetCurrentPosition();
-  // _config.elevator.leftGearbox.encoder->ZeroEncoder();
-  // _config.elevator.rightGearbox.encoder->ZeroEncoder();
-
-  // _config.arm.leftGearbox.encoder->SetEncoderPosition(90_deg);
   _armavator->OnStart();
-  // _config.arm.rightGearbox.encoder->SetEncoderPosition(90_deg);
-  // startHeight = 0_m;
-  // std::cout << "AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"<< std::endl;
-  // _manualSetpoint = {_armavator->elevator->GetConfig().leftGearbox.encoder->GetEncoderPosition() * _armavator->elevator->GetConfig().radius, _armavator->arm->GetConfig().leftGearbox.encoder->GetEncoderPosition()};
 }
 
 void ArmavatorManualBehaviour::OnTick(units::second_t dt) {
@@ -97,14 +85,13 @@ void ArmavatorManualBehaviour::OnTick(units::second_t dt) {
 
   if (_codriver.GetAButtonPressed()) {
     if (rawControl) {
-      // _manualSetpoint = {_armavator->GetCurrentPosition().height, _armavator->GetCurrentPosition().angle};
       rawControl = false;
     } else {
       rawControl = true;
     }
   }
 
-  if (rawControl) {
+  if (!rawControl) {
     double armPower = -wom::deadzone(_codriver.GetLeftY());
     double elePower = -wom::deadzone(_codriver.GetRightY());
     _armavator->SetManual(armPower * 11_V, elePower * 8_V);
@@ -113,21 +100,7 @@ void ArmavatorManualBehaviour::OnTick(units::second_t dt) {
     frc::SmartDashboard::PutBoolean("PID mode", false); 
 
   } else {
-    
     frc::SmartDashboard::PutBoolean("PID mode", true); 
-    /**SETPOINTS
-     * hold -> 
-     * place front mid -> 
-     * place back mid -> 
-     * place back high -> 0.2615_m, 157_deg
-     * grab cone -> 
-     * grab cone lying down -> 0.896, -3.4608
-     * grab cone on floor -> 
-     * 
-    */
-
-
-
     if (_codriver.GetPOV() == 0) {
       //picking up cone down 
       // _setpointValue.height = 0.1_m;
@@ -206,15 +179,11 @@ void ArmavatorManualBehaviour::OnTick(units::second_t dt) {
       units::meter_t height = _armavator->GetCurrentPosition().height;
       units::degree_t angle = _armavator->GetCurrentPosition().angle;
       _armavator->SetSpeedValues(0.5, 0.3);
-
-  
-      
       if (_manualSetpoint.height > 0.95_m) {
         _manualSetpoint.height = 0.95_m;
       } else if (_manualSetpoint.height < 0.01_m) {
         _manualSetpoint.height = 0.01_m;
       } else {
-        //if not outside deadzone set to current value
         _manualSetpoint.height -= (wom::deadzone(_codriver.GetRightY(), 0.15) * 1_m * 0.05);
       }
 
@@ -225,33 +194,16 @@ void ArmavatorManualBehaviour::OnTick(units::second_t dt) {
       } else {
          
         _manualSetpoint.angle -= (wom::deadzone(_codriver.GetLeftY(), 0.15) * 1_deg * 3);
-        // _manualSetpoint.angle = angle - (wom::spow2(wom::deadzone(_codriver.GetLeftY(), 0.3)) * 1_deg * 30);
       }
-      // units::degree_t trimmed_angle;
-      // units::degree_t max_angle = units::math::asin((height - (1.9_m - 0.51_m)) / (-_armavator->arm->GetConfig().armLength));
       units::meter_t max_height = (1.9_m - 0.51_m) - _armavator->arm->GetConfig().armLength * units::math::sin(_manualSetpoint.angle);
-      // if (_manualSetpoint.angle < 90_deg) {
-      //   trimmed_angle = units::math::min(max_angle, _manualSetpoint.angle);
-      // } else if (_manualSetpoint.angle >= 90_deg) {
-      //   trimmed_angle = units::math::max(3.1415_rad - max_angle,  _manualSetpoint.angle);
-      // }
-      
       ArmavatorPosition sp{
         units::math::min(_manualSetpoint.height, max_height),
         // trimmed_angle
         _manualSetpoint.angle
       };
-
-      // _manualSetpoint.angle = trimmed_angle;
-
       _armavator->SetPosition(sp);
     }
   }
-  // std::cout << "arm angle setpoint: " <<_manualSetpoint.angle.convert<units::degree>().value() << std::endl;
-  // std::cout << "elevator height setpoint: " << _manualSetpoint.height.convert<units::meter>().value() << std::endl;
-  // units::radian_t armPos = _armavator->arm->GetConfig().leftGearbox.encoder->GetEncoderPosition(); 
-  // std::cout << "arm pos: " << armPos.value() << std::endl;
-  // std::cout << "elevator pos: " << _armavator->elevator->GetConfig().leftGearbox.encoder->GetEncoderPosition().value() << std::endl;
 }
 
 /**
